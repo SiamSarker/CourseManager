@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth:sanctum', 'teacher'])->group(function () {
+    Route::get('/teacher-form', [TeacherController::class, 'showForm'])->name('teacher-form');
+    Route::post('/teacher-form', [TeacherController::class, 'createStudent'])->name('teacher-form.create');
+    Route::get('/students/{student}/edit', [TeacherController::class, 'editStudent'])->name('students.edit');
+    Route::put('/students/{student}', [TeacherController::class, 'updateStudent'])->name('students.update');
+    Route::delete('/students/{student}', [TeacherController::class, 'deleteStudent'])->name('students.delete');
+});
