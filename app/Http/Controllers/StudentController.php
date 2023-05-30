@@ -16,4 +16,14 @@ class StudentController extends Controller
 
         return view('profile', compact('student'));
     }
+
+    public function test()
+    {
+        $response = [
+            'user' => "Hello From",
+            'token' => "Student controller"
+        ];
+
+        return response($response, 202);
+    }
 }
